@@ -30,7 +30,7 @@ public class listView extends AppCompatActivity {
     int maxPrintedArticles;
     int refreshTimer;
     String Url;
-    Handler i = new Handler();
+    Handler h = new Handler();
     Runnable runnable;
 
     @Override
@@ -86,7 +86,7 @@ public class listView extends AppCompatActivity {
         //start handler as activity become visible
 
         //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(listView.this);
-        i.postDelayed(new Runnable() {
+        h.postDelayed(new Runnable() {
             public void run() {
                 // Run code
 
@@ -94,7 +94,7 @@ public class listView extends AppCompatActivity {
                 new ProcessInBackground().execute();
 
                 runnable=this;
-                i.postDelayed(runnable, refreshTimer);
+                h.postDelayed(runnable, refreshTimer);
             }
         }, refreshTimer);
 
@@ -103,7 +103,7 @@ public class listView extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        i.removeCallbacks(runnable); //stop when activity not visible
+        h.removeCallbacks(runnable); //stop when activity not visible
         super.onPause();
     }
 
